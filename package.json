@@ -33,8 +33,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@octokit/request": "^5.4.4",
-    "@octokit/types": "^4.1.9"
+    "@octokit/request": "^5.4.4"
   },
   "devDependencies": {
     "husky": "^4.2.5",

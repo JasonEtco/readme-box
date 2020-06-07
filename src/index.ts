@@ -1,8 +1,4 @@
 import { request } from '@octokit/request'
-import {
-  ReposGetReadmeResponseData,
-  ReposCreateOrUpdateFileResponseData
-} from '@octokit/types'
 
 interface ReadmeBoxOpts {
   owner: string
@@ -36,8 +32,6 @@ export class ReadmeBox {
     this.branch = opts.branch || 'master'
 
     this.request = request.defaults({
-      owner: this.owner,
-      repo: this.repo,
       headers: {
         authorization: `token ${this.token}`
       }
@@ -66,9 +60,9 @@ export class ReadmeBox {
   }
 
   async getReadme() {
-    const { data } = await this.request<ReposGetReadmeResponseData>({
-      url: `/repos/:owner/:repo/readme`,
-      method: 'GET'
+    const { data } = await this.request('GET /repos/:owner/:repo/readme', {
+      owner: this.owner,
+      repo: this.repo
     })
 
     // The API returns the blob as base64 encoded, we need to decode it
@@ -83,9 +77,9 @@ export class ReadmeBox {
   }
 
   async updateReadme(opts: { content: string; sha: string; message?: string }) {
-    return this.request<ReposCreateOrUpdateFileResponseData>({
-      url: '/repos/:owner/:repo/contents/:path',
-      method: 'PUT',
+    return this.request('PUT /repos/:owner/:repo/contents/:path', {
+      owner: this.owner,
+      repo: this.repo,
       content: opts.content,
       path: 'README.md',
       message: opts.message || 'Updating the README!',
