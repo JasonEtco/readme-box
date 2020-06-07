@@ -20,7 +20,7 @@
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "prettier": {
@@ -33,11 +33,13 @@
   "module": "dist/readme-box.esm.js",
   "devDependencies": {
     "husky": "^4.2.5",
+    "pretty-quick": "^2.0.1",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "@octokit/request": "^5.4.4"
+    "@octokit/request": "^5.4.4",
+    "@octokit/types": "^4.1.9"
   }
 }

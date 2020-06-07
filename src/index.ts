@@ -1,4 +1,8 @@
 import { request } from '@octokit/request'
+import {
+  ReposGetReadmeResponseData,
+  ReposCreateOrUpdateFileResponseData
+} from '@octokit/types'
 
 interface ReadmeBoxOpts {
   owner: string
@@ -62,7 +66,7 @@ export class ReadmeBox {
   }
 
   async getReadme() {
-    const { data } = await this.request<{ content: string; sha: string }>({
+    const { data } = await this.request<ReposGetReadmeResponseData>({
       url: `/repos/:owner/:repo/readme`,
       method: 'GET'
     })
@@ -73,12 +77,13 @@ export class ReadmeBox {
 
     return {
       content: decoded,
-      sha: data.sha
+      sha: data.sha,
+      path: data.path
     }
   }
 
   async updateReadme(opts: { content: string; sha: string; message?: string }) {
-    return this.request({
+    return this.request<ReposCreateOrUpdateFileResponseData>({
       url: '/repos/:owner/:repo/contents/:path',
       method: 'PUT',
       content: opts.content,
