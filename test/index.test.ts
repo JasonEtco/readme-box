@@ -2,6 +2,10 @@ import nock from 'nock'
 import { ReadmeBox, UpdateSectionOpts } from '../src'
 import * as fixtures from './fixtures'
 
+function decode(string: string) {
+  return Buffer.from(string, 'base64').toString('utf8')
+}
+
 describe('ReadmeBox', () => {
   let opts: UpdateSectionOpts
   let updateFileContentsUri: string
@@ -41,7 +45,7 @@ describe('ReadmeBox', () => {
     it('calls the API requests and updates the section of the README', async () => {
       await ReadmeBox.updateSection('New content!', opts)
       expect(nock.isDone()).toBe(true)
-      expect(updateFileContentsParams.content).toBe(
+      expect(decode(updateFileContentsParams.content)).toBe(
         fixtures.ReadmeContent.replace('Old stuff...', 'New content!')
       )
     })
@@ -56,9 +60,7 @@ describe('ReadmeBox', () => {
   describe('#updateReadme', () => {
     it('updates the README', async () => {
       await box.updateReadme({ content: 'yep', sha: '123abc' })
-      expect(updateFileContentsParams).toMatchObject({
-        content: 'yep'
-      })
+      expect(decode(updateFileContentsParams.content)).toBe('yep')
     })
 
     it('uses the provided path', async () => {

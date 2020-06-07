@@ -86,7 +86,7 @@ export class ReadmeBox {
     return this.request('PUT /repos/:owner/:repo/contents/:path', {
       owner: this.owner,
       repo: this.repo,
-      content: opts.content,
+      content: Buffer.from(opts.content).toString('base64'),
       path: opts.path || 'README.md',
       message: opts.message || 'Updating the README!',
       sha: opts.sha,
