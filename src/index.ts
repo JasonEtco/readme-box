@@ -1,18 +1,18 @@
 import { request } from '@octokit/request'
 
-interface ReadmeBoxOpts {
+export interface ReadmeBoxOpts {
   owner: string
   repo: string
   token: string
   branch?: string
 }
 
-interface UpdateSectionOpts extends ReadmeBoxOpts {
+export interface UpdateSectionOpts extends ReadmeBoxOpts {
   section: string
   message?: string
 }
 
-interface ReplaceSectionOpts {
+export interface ReplaceSectionOpts {
   section: string
   newContents: string
   oldContents: string
