@@ -1,14 +1,12 @@
 {
+  "name": "readme-box",
+  "author": "Jason Etcovitch",
+  "description": "Lil' helper for replacing a section of the contents of a README.",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "engines": {
-    "node": ">=10"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JasonEtco/readme-box"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -17,7 +15,13 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build"
   },
-  "peerDependencies": {},
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/readme-box.esm.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
@@ -28,18 +32,15 @@
     "semi": false,
     "singleQuote": true
   },
-  "name": "readme-box",
-  "author": "Jason Etcovitch",
-  "module": "dist/readme-box.esm.js",
+  "dependencies": {
+    "@octokit/request": "^5.4.4",
+    "@octokit/types": "^4.1.9"
+  },
   "devDependencies": {
     "husky": "^4.2.5",
     "pretty-quick": "^2.0.1",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.5"
-  },
-  "dependencies": {
-    "@octokit/request": "^5.4.4",
-    "@octokit/types": "^4.1.9"
   }
 }
