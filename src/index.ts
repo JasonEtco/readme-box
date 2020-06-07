@@ -97,6 +97,13 @@ export class ReadmeBox {
 
   replaceSection(opts: ReplaceSectionOpts) {
     const reg = this.createRegExp(opts.section)
+
+    if (!reg.test(opts.oldContents)) {
+      throw new Error(
+        `Contents do not contain start/end comments for section "${opts.section}"`
+      )
+    }
+
     return opts.oldContents.replace(reg, opts.newContents)
   }
 
