@@ -58,13 +58,11 @@ await box.updateReadme({ content, sha, message: 'Updating the README!' })
 
 It expects your README to have a "section", using HTML comments:
 
-```md
+```html
 Check out this README!
 
 <!--START_SECTION:example-section-->
-
 Old contents...
-
 <!--END_SECTION:example-section-->
 ```
 
