@@ -95,26 +95,28 @@ export class ReadmeBox {
   }
 
   getSection(section: string, content: string) {
-    const reg = this.createRegExp(section)
-    const match = content.match(reg)
+    const { regex } = this.createRegExp(section)
+    const match = content.match(regex)
     return match?.groups?.content
   }
 
   replaceSection(opts: ReplaceSectionOpts) {
-    const reg = this.createRegExp(opts.section)
+    const { regex, start, end } = this.createRegExp(opts.section)
 
-    if (!reg.test(opts.oldContents)) {
+    if (!regex.test(opts.oldContents)) {
       throw new Error(
         `Contents do not contain start/end comments for section "${opts.section}"`
       )
     }
 
-    return opts.oldContents.replace(reg, opts.newContents)
+    const newContentsWithComments = `${start}\n${opts.newContents}\n${end}`
+    return opts.oldContents.replace(regex, newContentsWithComments)
   }
 
   private createRegExp(section: string) {
-    const START_COMMENT = `<!--START_SECTION:${section}-->`
-    const END_COMMENT = `<!--END_SECTION:${section}-->`
-    return new RegExp(`${START_COMMENT}(?<content>[\\s\\S]+)${END_COMMENT}`)
+    const start = `<!--START_SECTION:${section}-->`
+    const end = `<!--END_SECTION:${section}-->`
+    const regex = new RegExp(`${start}(?<content>[\\s\\S]+)${end}`)
+    return { regex, start, end }
   }
 }
