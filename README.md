@@ -1,6 +1,6 @@
 <h3 align="center">README Box</h3>
 <p align="center">Lil' helper for replacing a section of the contents of a README.<p>
-<p align="center"><a href="https://npmjs.com/package/readme-box"><img src="https://badgen.net/npm/v/readme-box" alt="NPM"></a></p>
+<p align="center"><a href="https://npmjs.com/package/readme-box"><img src="https://badgen.net/npm/v/readme-box" alt="NPM"></a> <img alt="CI" src="https://github.com/JasonEtco/readme-box/workflows/CI/badge.svg" /> <a href="https://codecov.io/gh/JasonEtco/readme-box/"><img src="https://badgen.now.sh/codecov/c/github/JasonEtco/readme-box" alt="Codecov"></a></p>
 
 ## Usage
 
@@ -52,9 +52,9 @@ await box.updateReadme({ content, sha, message: 'Updating the README!' })
 
 `ReadmeBox.updateSection` combines a couple of the methods exposed on the `ReadmeBox` class, to do the following:
 
-* Get the README file's contents from the API
-* Replace a section of it using Regular Expressions
-* Update the file via the API
+- Get the README file's contents from the API
+- Replace a section of it using Regular Expressions
+- Update the file via the API
 
 It expects your README to have a "section", using HTML comments:
 
@@ -62,7 +62,9 @@ It expects your README to have a "section", using HTML comments:
 Check out this README!
 
 <!--START_SECTION:example-section-->
+
 Old contents...
+
 <!--END_SECTION:example-section-->
 ```
 
@@ -81,6 +83,7 @@ Runs the project in development/watch mode. The project will be rebuilt upon cha
 Bundles the package to the `dist` folder.
 The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
 s
+
 ### `npm test`
 
 Runs the test watcher (Jest) in an interactive mode.
