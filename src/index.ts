@@ -42,7 +42,7 @@ export class ReadmeBox {
     const box = new ReadmeBox(opts)
 
     // Get the README
-    const { content, sha } = await box.getReadme()
+    const { content, sha, path } = await box.getReadme()
 
     // Replace the old contents with the new
     const replaced = box.replaceSection({
@@ -55,7 +55,8 @@ export class ReadmeBox {
     return box.updateReadme({
       content: replaced,
       message: opts.message,
-      sha
+      sha,
+      path
     })
   }
 
@@ -76,12 +77,17 @@ export class ReadmeBox {
     }
   }
 
-  async updateReadme(opts: { content: string; sha: string; message?: string }) {
+  async updateReadme(opts: {
+    content: string
+    sha: string
+    path?: string
+    message?: string
+  }) {
     return this.request('PUT /repos/:owner/:repo/contents/:path', {
       owner: this.owner,
       repo: this.repo,
       content: opts.content,
-      path: 'README.md',
+      path: opts.path || 'README.md',
       message: opts.message || 'Updating the README!',
       sha: opts.sha,
       branch: 'master'
