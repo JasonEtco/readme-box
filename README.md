@@ -12,11 +12,61 @@ $ npm install readme-box
 
 ```js
 const { ReadmeBox } = require('readme-box')
+import { ReadmeBox } from 'readme-box'
+```
+
+You can quickly update a section of a README:
+
+```js
+await ReadmeBox.updateSection('New contents!', {
+  owner: 'JasonEtco',
+  repo: 'example',
+  token: process.env.GITHUB_TOKEN,
+  section: 'example-section'
+})
+```
+
+Or, if you need to access parts of it more granularly, you can use the `ReadmeBox` class methods:
+
+```js
+const box = new ReadmeBox({ owner, repo, token })
+
+// Get the contents of the README from the API
+const { content, sha } = await box.getReadme()
+
+// Get the contents of a section of the provided string
+const sectionContents = box.getSection('example-section', content)
+
+// Return a string with the replaced contents
+const replacedContents = box.replaceSection({
+  section: 'example-section',
+  oldContent,
+  newContent
+})
+
+// Update the README via the API, with an optional commit message
+await box.updateReadme({ content, sha, message: 'Updating the README!' })
 ```
 
 ## How it works
 
-Like magic!
+`ReadmeBox.updateSection` combines a couple of the methods exposed on the `ReadmeBox` class, to do the following:
+
+* Get the README file's contents from the API
+* Replace a section of it using Regular Expressions
+* Update the file via the API
+
+It expects your README to have a "section", using HTML comments:
+
+```md
+Check out this README!
+
+<!--START_SECTION:example-section-->
+Old contents...
+<!--END_SECTION:example-section-->
+```
+
+When the above example code is run, everything between the start and end comments will be replaced.
 
 ## Local Development
 
