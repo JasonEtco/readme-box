@@ -108,5 +108,16 @@ describe('ReadmeBox', () => {
         'Contents do not contain start/end comments for section "example"'
       )
     })
+
+    it('works when the comments are not separated by any content', () => {
+      const result = box.replaceSection({
+        newContents: 'New content!',
+        oldContents: '<!--START_SECTION:example-->\n<!--END_SECTION:example-->',
+        section: 'example'
+      })
+      expect(result).toBe(
+        '<!--START_SECTION:example-->\nNew content!\n<!--END_SECTION:example-->'
+      )
+    })
   })
 })
