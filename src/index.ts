@@ -116,7 +116,7 @@ export class ReadmeBox {
   private createRegExp(section: string) {
     const start = `<!--START_SECTION:${section}-->`
     const end = `<!--END_SECTION:${section}-->`
-    const regex = new RegExp(`${start}\n(?<content>[\\s\\S]+)\n${end}`)
+    const regex = new RegExp(`${start}\n(?:(?<content>[\\s\\S]+)\n)?${end}`)
     return { regex, start, end }
   }
 }

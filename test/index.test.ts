@@ -83,6 +83,14 @@ describe('ReadmeBox', () => {
       const result = box.getSection('nope', fixtures.ReadmeContent)
       expect(result).toBeUndefined()
     })
+
+    it('returns undefined if the section is empty', () => {
+      const result = box.getSection(
+        'example',
+        '<!--START_SECTION:example-->\n<!--END_SECTION:example-->'
+      )
+      expect(result).toBeUndefined()
+    })
   })
 
   describe('#replaceSection', () => {
@@ -106,6 +114,17 @@ describe('ReadmeBox', () => {
         })
       ).toThrowError(
         'Contents do not contain start/end comments for section "example"'
+      )
+    })
+
+    it('works when the comments are not separated by any content', () => {
+      const result = box.replaceSection({
+        newContents: 'New content!',
+        oldContents: '<!--START_SECTION:example-->\n<!--END_SECTION:example-->',
+        section: 'example'
+      })
+      expect(result).toBe(
+        '<!--START_SECTION:example-->\nNew content!\n<!--END_SECTION:example-->'
       )
     })
   })
