@@ -83,6 +83,14 @@ describe('ReadmeBox', () => {
       const result = box.getSection('nope', fixtures.ReadmeContent)
       expect(result).toBeUndefined()
     })
+
+    it('returns undefined if the section is empty', () => {
+      const result = box.getSection(
+        'example',
+        '<!--START_SECTION:example-->\n<!--END_SECTION:example-->'
+      )
+      expect(result).toBeUndefined()
+    })
   })
 
   describe('#replaceSection', () => {
