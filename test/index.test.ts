@@ -24,7 +24,7 @@ describe('ReadmeBox', () => {
     box = new ReadmeBox(opts)
 
     nock('https://api.github.com')
-      .get(`/repos/${opts.owner}/${opts.repo}/tree/${opts.branch}/readme`)
+      .get(`/repos/${opts.owner}/${opts.repo}/readme?ref=${opts.branch}`)
       .reply(200, fixtures.getReadme)
       .put(new RegExp(`/repos/${opts.owner}/${opts.repo}/contents/.*`))
       .reply(200, (uri, body) => {
