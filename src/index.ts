@@ -55,6 +55,7 @@ export class ReadmeBox {
     return box.updateReadme({
       content: replaced,
       message: opts.message,
+      branch: opts.branch,
       sha,
       path
     })
@@ -63,7 +64,8 @@ export class ReadmeBox {
   async getReadme() {
     const { data } = await this.request('GET /repos/:owner/:repo/readme', {
       owner: this.owner,
-      repo: this.repo
+      repo: this.repo,
+      ref: this.branch
     })
 
     // The API returns the blob as base64 encoded, we need to decode it
@@ -82,6 +84,7 @@ export class ReadmeBox {
     sha: string
     path?: string
     message?: string
+    branch?: string
   }) {
     return this.request('PUT /repos/:owner/:repo/contents/:path', {
       owner: this.owner,
@@ -90,7 +93,7 @@ export class ReadmeBox {
       path: opts.path || 'README.md',
       message: opts.message || 'Updating the README!',
       sha: opts.sha,
-      branch: 'master'
+      branch: opts.branch || 'master'
     })
   }
 
