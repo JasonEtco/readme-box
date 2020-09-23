@@ -55,7 +55,7 @@ export class ReadmeBox {
     return box.updateReadme({
       content: replaced,
       message: opts.message,
-      branch: opts.branch,
+      branch: opts.branch ? encodeURI(opts.branch) : undefined || 'master',
       sha,
       path
     })
@@ -93,7 +93,7 @@ export class ReadmeBox {
       path: opts.path || 'README.md',
       message: opts.message || 'Updating the README!',
       sha: opts.sha,
-      branch: opts.branch || 'master'
+      branch: opts.branch ? encodeURI(opts.branch) : undefined || 'master'
     })
   }
 
