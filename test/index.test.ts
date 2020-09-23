@@ -18,7 +18,7 @@ describe('ReadmeBox', () => {
       repo: 'readme-box',
       token: '123abc',
       section: 'example',
-      branch: 'master'
+      branch: 'feat/fix'
     }
 
     box = new ReadmeBox(opts)

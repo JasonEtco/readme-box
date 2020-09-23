@@ -29,7 +29,7 @@ export class ReadmeBox {
     this.owner = opts.owner
     this.repo = opts.repo
     this.token = opts.token
-    this.branch = opts.branch || 'master'
+    this.branch = opts.branch ? encodeURI(opts.branch) : undefined || 'master'
 
     this.request = request.defaults({
       headers: {
