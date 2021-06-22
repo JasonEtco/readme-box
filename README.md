@@ -22,6 +22,8 @@ await ReadmeBox.updateSection('New contents!', {
   owner: 'JasonEtco',
   repo: 'example',
   token: process.env.GITHUB_TOKEN,
+  // branch is assumed to be 'master' by default, you can also specify `branch: 'main'`
+  branch: 'main',
   section: 'example-section'
 })
 ```
