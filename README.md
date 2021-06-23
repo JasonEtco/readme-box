@@ -29,8 +29,8 @@ const result = await ReadmeBox.updateSection('New contents!', {
   emptyCommits: true
 })
 
-// result is the response object of the README update request or
-// undefined in case there were no changes and emptyCommits is set to false
+// `result` is the response object of the README update request or
+// `undefined` in case there were no changes and `emptyCommits` is set to `false`
 ```
 
 Or, if you need to access parts of it more granularly, you can use the `ReadmeBox` class methods:
