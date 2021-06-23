@@ -2,7 +2,7 @@
   "name": "readme-box",
   "author": "Jason Etcovitch",
   "description": "Lil' helper for replacing a section of the contents of a README.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "repository": {
     "type": "git",
