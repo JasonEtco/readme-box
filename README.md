@@ -18,14 +18,19 @@ import { ReadmeBox } from 'readme-box'
 You can quickly update a section of a README:
 
 ```js
-await ReadmeBox.updateSection('New contents!', {
+const result = await ReadmeBox.updateSection('New contents!', {
   owner: 'JasonEtco',
   repo: 'example',
   token: process.env.GITHUB_TOKEN,
   // branch is assumed to be 'master' by default, you can also specify `branch: 'main'`
   branch: 'main',
-  section: 'example-section'
+  section: 'example-section',
+  // set to false to avoid empty commits in case of no changes
+  emptyCommits: true
 })
+
+// result is the response object of the README update request or
+// undefined in case there were no changes and emptyCommits is set to false
 ```
 
 Or, if you need to access parts of it more granularly, you can use the `ReadmeBox` class methods:
