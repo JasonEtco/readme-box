@@ -56,6 +56,16 @@ describe('ReadmeBox', () => {
       await ReadmeBox.updateSection('New content!', opts)
       expect(updateFileContentsParams.message).toBe(opts.message)
     })
+
+    it('Does not create commit if `emptyCommits` is set to `false` and there are no changes', async () => {
+      const result = await ReadmeBox.updateSection('Old stuff...', {
+        ...opts,
+        emptyCommits: false
+      })
+
+      expect(result).toBeUndefined()
+      expect(nock.isDone()).toBe(false)
+    })
   })
 
   describe('#updateReadme', () => {
