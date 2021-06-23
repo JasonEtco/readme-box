@@ -10,6 +10,7 @@ export interface ReadmeBoxOpts {
 export interface UpdateSectionOpts extends ReadmeBoxOpts {
   section: string
   message?: string
+  emptyCommits?: boolean
 }
 
 export interface ReplaceSectionOpts {
@@ -50,6 +51,10 @@ export class ReadmeBox {
       oldContents: content,
       newContents
     })
+
+    if (opts.emptyCommits === false && content === replaced) {
+      return
+    }
 
     // Actually update the README
     return box.updateReadme({
