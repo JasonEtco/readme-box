@@ -25,12 +25,12 @@ const result = await ReadmeBox.updateSection('New contents!', {
   // branch is assumed to be 'master' by default, you can also specify `branch: 'main'`
   branch: 'main',
   section: 'example-section',
-  // set to false to avoid empty commits in case of no changes
-  emptyCommits: true
+  // set to `true` to allow empty commits when there are no changes
+  emptyCommits: false
 })
 
 // `result` is the response object of the README update request or
-// `undefined` in case there were no changes and `emptyCommits` is set to `false`
+// `undefined` if no changes were made.
 ```
 
 Or, if you need to access parts of it more granularly, you can use the `ReadmeBox` class methods:
