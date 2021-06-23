@@ -52,7 +52,7 @@ export class ReadmeBox {
       newContents
     })
 
-    if (opts.emptyCommits === false && content === replaced) {
+    if (opts.emptyCommits !== true && content === replaced) {
       return
     }
 
